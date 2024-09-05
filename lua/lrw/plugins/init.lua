@@ -1,3 +1,4 @@
 return {
-    "folke/noice.nvim",
+  "folke/noice.nvim",
+  "norcalli/nvim-colorizer.lua"
 }

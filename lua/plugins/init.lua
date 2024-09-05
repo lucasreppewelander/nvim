@@ -1,7 +1,7 @@
 return {
     {
         "stevearc/conform.nvim",
-        -- event = 'BufWritePre', -- uncomment for format on save
+        event = 'BufWritePre', -- uncomment for format on save
         opts = require "configs.conform",
     },
 
@@ -47,6 +47,7 @@ return {
     },
     {
         "supermaven-inc/supermaven-nvim",
+        lazy = false,
         config = function()
             require("supermaven-nvim").setup({
                 keymaps = {
