@@ -1,10 +1,24 @@
-require "plugins"
 require("lrw.remap")
 
 vim.opt.relativenumber = true
 vim.opt.nu = true
 vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.autoread = true
 
+vim.cmd [[colorscheme eldritch]]
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
+
+
+local augroup = vim.api.nvim_create_augroup
+local LrwGroup = augroup('LRW', {})
+
+local autocmd = vim.api.nvim_create_autocmd
 
 require("noice").setup({
     lsp = {
@@ -25,12 +39,10 @@ require("noice").setup({
     },
 })
 
-
-vim.api.nvim_create_augroup('AutoFormatting', {})
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*',
-  group = 'AutoFormatting',
-  callback = function()
-    vim.lsp.buf.format({ async = false })
-  end,
+autocmd({ "BufWritePre" }, {
+    group = LrwGroup,
+    pattern = "*",
+    callback = function()
+        vim.lsp.buf.format({ async = false })
+    end,
 })
