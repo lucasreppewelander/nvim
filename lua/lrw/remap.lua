@@ -23,3 +23,4 @@ vim.keymap.set("n", "<C-p>", ":Telescope git_files<CR>", { desc = "Git files" })
 vim.keymap.set("n", "<leader>sg", ":Telescope live_grep<CR>", { desc = "Search in project" })
 
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file tree" })
+vim.keymap.set("n", "<leader>x", ":bd<CR>", { desc = "Close buffer" })
