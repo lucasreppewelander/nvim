@@ -1,6 +1,8 @@
 return {
   "folke/noice.nvim",
   "tpope/vim-commentary",
+  "tpope/vim-surround",
+  "tpope/vim-repeat",
   "norcalli/nvim-colorizer.lua",
   "folke/which-key.nvim",
   {

@@ -31,12 +31,11 @@ return {
         mason_lsp_config.setup({
             -- Replace the language servers listed here
             -- with the ones you want to install
-            ensure_installed = { 'ts_ls', 'rust_analyzer', 'kotlin_language_server', 'lua_ls', 'graphql', 'biome' },
+            ensure_installed = { 'ts_ls', 'rust_analyzer', 'kotlin_language_server', 'lua_ls', 'graphql', 'biome', 'stylelint_lsp' },
             handlers = {
                 lsp.default_setup,
             },
         })
-
 
         local cmp = require('cmp')
         local cmp_action = require('lsp-zero').cmp_action()

@@ -20,6 +20,19 @@ local LrwGroup = augroup('LRW', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 
+require("lspconfig").stylelint_lsp.setup({
+  filetypes = { "css", "scss", "ts", "tsx", "js", "jsx" },
+  root_dir = require("lspconfig").util.root_pattern("package.json", ".git"),
+  settings = {
+    stylelintplus = {
+      -- see available options in stylelint-lsp documentation
+    },
+  },
+  on_attach = function(client)
+    client.server_capabilities.document_formatting = false
+  end,
+})
+
 require("noice").setup({
 	lsp = {
 		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
