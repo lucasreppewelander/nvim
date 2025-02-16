@@ -7,17 +7,17 @@ return {
         { 'williamboman/mason.nvim' },
         { 'williamboman/mason-lspconfig.nvim' },
 
-        -- Autocompletion
-        { 'hrsh7th/nvim-cmp' },
-        { 'hrsh7th/cmp-buffer' },
-        { 'hrsh7th/cmp-path' },
-        { 'saadparwaiz1/cmp_luasnip' },
-        { 'hrsh7th/cmp-nvim-lsp' },
-        { 'hrsh7th/cmp-nvim-lua' },
+        -- -- Autocompletion
+        -- { 'hrsh7th/nvim-cmp' },
+        -- { 'hrsh7th/cmp-buffer' },
+        -- { 'hrsh7th/cmp-path' },
+        -- { 'saadparwaiz1/cmp_luasnip' },
+        -- { 'hrsh7th/cmp-nvim-lsp' },
+        -- { 'hrsh7th/cmp-nvim-lua' },
 
-        -- Snippets
-        { 'L3MON4D3/LuaSnip' },
-        { 'rafamadriz/friendly-snippets' },
+        -- -- Snippets
+        -- { 'L3MON4D3/LuaSnip' },
+        -- { 'rafamadriz/friendly-snippets' },
     },
     config = function()
         local lsp = require('lsp-zero').preset({
@@ -33,30 +33,33 @@ return {
             -- with the ones you want to install
             ensure_installed = { 'ts_ls', 'rust_analyzer', 'kotlin_language_server', 'lua_ls', 'graphql', 'biome', 'stylelint_lsp' },
             handlers = {
-                lsp.default_setup,
-            },
+                function(server_name)
+                    require('lspconfig')[server_name].setup({})
+                end,
+            }
         })
 
-        local cmp = require('cmp')
-        local cmp_action = require('lsp-zero').cmp_action()
 
-        cmp.setup({
-            mapping = cmp.mapping.preset.insert({
-                -- `Enter` key to confirm completion
-                ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        -- local cmp = require('cmp')
+        -- local cmp_action = require('lsp-zero').cmp_action()
 
-                -- Ctrl+Space to trigger completion menu
-                ['<C-Space>'] = cmp.mapping.complete(),
+        -- cmp.setup({
+        --     mapping = cmp.mapping.preset.insert({
+        --         -- `Enter` key to confirm completion
+        --         ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
-                -- Navigate between snippet placeholder
-                ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-                ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+        --         -- Ctrl+Space to trigger completion menu
+        --         ['<C-Space>'] = cmp.mapping.complete(),
 
-                -- Scroll up and down in the completion documentation
-                ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-d>'] = cmp.mapping.scroll_docs(4),
-            })
-        })
+        --         -- Navigate between snippet placeholder
+        --         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+        --         ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+
+        --         -- Scroll up and down in the completion documentation
+        --         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        --         ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        --     })
+        -- })
 
         lsp.set_preferences({
             suggest_lsp_servers = false,
